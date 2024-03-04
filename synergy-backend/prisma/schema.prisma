@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model ReadingPerFiveSecond {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  voltage Float
+  power1 Float
+  power2 Float
+  power3 Float
+  crnt1 Float
+  crnt2 Float
+  crnt3 Float
+  createdAt DateTime @default(now())
+}
+
+model ReadingPerHour {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  socketId Int
+  power Float
+  startHour String
+  endHour String
+  createdAt DateTime @default(now())
+}
